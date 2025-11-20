@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_category_overviews",
+  "info": {
+    "displayName": "Overview"
+  },
+  "options": {},
+  "attributes": {
+    "card1_title": {
+      "type": "string"
+    },
+    "card1_description": {
+      "type": "blocks"
+    },
+    "card2_title": {
+      "type": "string"
+    },
+    "card2_description": {
+      "type": "blocks"
+    },
+    "card3_title": {
+      "type": "string"
+    },
+    "card3_description": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

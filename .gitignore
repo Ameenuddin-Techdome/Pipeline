@@ -1,0 +1,23 @@
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Terraform variable files with secrets
+*.tfvars
+
+# Local configuration files
+clinic-config-*.json
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+structure.txt

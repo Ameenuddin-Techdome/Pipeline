@@ -1,0 +1,15 @@
+{
+  "tenant_id": "clinic-123",
+  "environment": "development",
+  "region": "centralus",
+  "app_service_plan": "B1",
+  "database_sku": "Basic",
+  "admin_email": "admin@clinic123.com",
+  "admin_password": "securePass123!",
+  "subfolder_path": "my-medusa-store",
+  "repository": {
+    "url": "https://github.com/techdome-io/ecommpoc",
+    "branch": "main",
+    "app_command_line" : "cd ${var.subfolder_path} && npm install && npm run start"
+  }
+}

@@ -1,0 +1,25 @@
+
+> my-medusa-store@0.0.1 start
+> medusa start
+
+[32minfo[39m:    redisUrl not found. A fake redis instance will be used.
+[32minfo[39m:    redisUrl not found. A fake redis instance will be used.
+[32minfo[39m:    Skipping instrumentation registration. No register function found.
+[32minfo[39m:    redisUrl not found. A fake redis instance will be used.
+[32minfo[39m:    No link to load from /home/azureuser/ecommpoc/my-medusa-store/node_modules/@medusajs/draft-order/.medusa/server/src/links. skipped.
+[33mwarn[39m:    Local Event Bus installed. This is not recommended for production.
+[32minfo[39m:    Locking module: Using "in-memory" as default.
+[32minfo[39m:    No workflow to load from /home/azureuser/ecommpoc/my-medusa-store/node_modules/@medusajs/draft-order/.medusa/server/src/workflows. skipped.
+[32minfo[39m:    No subscriber to load from /home/azureuser/ecommpoc/my-medusa-store/node_modules/@medusajs/draft-order/.medusa/server/src/subscribers. skipped.
+[32minfo[39m:    No job to load from /home/azureuser/ecommpoc/my-medusa-store/node_modules/@medusajs/medusa/dist/jobs. skipped.
+[32minfo[39m:    No job to load from /home/azureuser/ecommpoc/my-medusa-store/node_modules/@medusajs/draft-order/.medusa/server/src/jobs. skipped.
+- Creating server
+✔ Server is ready on port: 8080 – 18ms
+[32minfo[39m:    Admin URL → http://localhost:8080/app
+[32mhttp[39m:    GET / ← - (404) - 19.523 ms
+[32mhttp[39m:    GET /app ← - (304) - 24.250 ms
+[32mhttp[39m:    GET /app/entry.jsx ← http://20.80.77.81:8080/app (304) - 2.168 ms
+[32mhttp[39m:    GET /app/index.css ← http://20.80.77.81:8080/app/entry.jsx (304) - 4045.077 ms
+[32mhttp[39m:    GET /admin/feature-flags ← http://20.80.77.81:8080/app (304) - 3.673 ms
+[32mhttp[39m:    GET /admin/users/me ← http://20.80.77.81:8080/app (401) - 1.411 ms
+[32mhttp[39m:    GET /admin/users/me ← http://20.80.77.81:8080/app (401) - 1.546 ms

@@ -1,0 +1,116 @@
+import { sdk } from "@lib/config"
+import { HttpTypes } from "@medusajs/types"
+import { getCacheOptions } from "./cookies"
+
+export const listCategories = async (query?: Record<string, any>) => {
+  try {
+    const next = {
+      ...(await getCacheOptions("categories")),
+    }
+
+    const limit = query?.limit || 100
+
+    const { product_categories } = await sdk.client.fetch<{ 
+      product_categories: HttpTypes.StoreProductCategory[] 
+    }>(
+      "/store/product-categories",
+      {
+        query: {
+          fields: "*category_children,*products,*parent_category",
+          limit,
+          ...query,
+        },
+        next,
+        cache: "force-cache",
+      }
+    )
+
+    return product_categories || []
+  } catch (error) {
+    console.error('Error fetching categories:', error)
+    return []
+  }
+}
+
+export const getCategoryByHandle = async (categoryHandle: string[]) => {
+  if (!categoryHandle || categoryHandle.length === 0) {
+    return null
+  }
+
+  const handle = categoryHandle.join("/")
+  
+  try {
+    const next = {
+      ...(await getCacheOptions("categories")),
+    }
+
+    const { product_categories } = await sdk.client.fetch<
+      HttpTypes.StoreProductCategoryListResponse
+    >(
+      `/store/product-categories`,
+      {
+        query: { 
+          fields: "*category_children,*products",
+          handle 
+        },
+        next,
+        cache: "force-cache", // Use force-cache for build time
+      }
+    )
+
+    return product_categories?.[0] || null
+  } catch (error) {
+    console.error(`Error fetching category with handle ${handle}:`, error)
+    return null
+  }
+}
+
+// import { sdk } from "@lib/config"
+// import { HttpTypes } from "@medusajs/types"
+// import { getCacheOptions } from "./cookies"
+
+// export const listCategories = async (query?: Record<string, any>) => {
+//   const next = {
+//     ...(await getCacheOptions("categories")),
+//   }
+
+//   const limit = query?.limit || 100
+
+//   return sdk.client
+//     .fetch<{ product_categories: HttpTypes.StoreProductCategory[] }>(
+//       "/store/product-categories",
+//       {
+//         query: {
+//           fields:
+//             "*category_children, *products, *parent_category, *parent_category.parent_category",
+//           limit,
+//           ...query,
+//         },
+//         next,
+//         cache: "force-cache",
+//       }
+//     )
+//     .then(({ product_categories }) => product_categories)
+// }
+
+// export const getCategoryByHandle = async (categoryHandle: string[]) => {
+//   const handle = `${categoryHandle.join("/")}`
+
+//   const next = {
+//     ...(await getCacheOptions("categories")),
+//   }
+
+//   return sdk.client
+//     .fetch<HttpTypes.StoreProductCategoryListResponse>(
+//       `/store/product-categories`,
+//       {
+//         query: {
+//           fields: "*category_children, *products",
+//           handle,
+//         },
+//         next,
+//         cache: "force-cache",
+//       }
+//     )
+//     .then(({ product_categories }) => product_categories[0])
+// }

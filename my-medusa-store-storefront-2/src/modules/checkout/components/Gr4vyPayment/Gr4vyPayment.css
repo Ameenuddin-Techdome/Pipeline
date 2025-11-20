@@ -1,0 +1,85 @@
+/* Gr4vy Payment Component Styles */
+.gr4vy-payment-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #f9f9f9;
+}
+ 
+.gr4vy-payment-title {
+  text-align: left;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+ 
+.gr4vy-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  padding: 32px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  min-height: 400px;
+}
+ 
+.gr4vy-pay-button {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px auto 0;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #ff6b6b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+ 
+.gr4vy-pay-button:hover {
+  background-color: #ff5252;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+ 
+.gr4vy-pay-button:active {
+  background-color: #ff3838;
+  transform: translateY(1px);
+}
+ 
+.gr4vy-pay-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+}
+ 
+.gr4vy-pay-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+ 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gr4vy-payment-wrapper {
+    padding: 16px;
+  }
+ 
+  .gr4vy-container {
+    padding: 20px;
+  }
+ 
+  .gr4vy-payment-title {
+    font-size: 24px;
+  }
+}

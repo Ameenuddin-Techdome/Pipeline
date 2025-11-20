@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "informational_pages",
+  "info": {
+    "singularName": "informational-page",
+    "pluralName": "informational-pages",
+    "displayName": "Informational Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Content": {
+      "type": "blocks",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title",
+      "required": true
+    }
+  }
+}
