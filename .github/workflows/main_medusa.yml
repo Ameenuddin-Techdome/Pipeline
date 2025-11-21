@@ -64,9 +64,7 @@ jobs:
       # 2. Build Docker image
       - name: Build Docker image
         run: |
-          docker build \
-            --build-arg NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=$NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY \
-            -t my-app .
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/medusa-storefront:latest ./my-medusa-store-storefront
 
       # 3. Login to Azure Container Registry
       - name: Login to ACR
