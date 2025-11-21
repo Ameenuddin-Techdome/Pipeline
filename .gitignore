@@ -1,0 +1,31 @@
+# Terraform directories and state
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Local configuration files
+clinic-config-*.json
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+structure.txt
+
+# If you have any non-sensitive tfvars/configs you want to commit, whitelist them:
+!storefront-tf/storefront-vars-example.tfvars
+
+# Optional: whitelist your Terraform modules and main files
+!main.tf
+!outputs.tf
+!variables.tf
+!providers.tf
+!modules/
+!README.md

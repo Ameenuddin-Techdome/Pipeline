@@ -1,0 +1,21 @@
+{
+  "clinic_id": "CLN001",
+  "clinic_code": "smdc",
+  "clinic_name": "Smile Dental Clinic",
+  "branding": {
+    "logo_url": "https://example.com/logo.png",
+    "primary_color": "#1E90FF",
+    "secondary_color": "#FFFFFF",
+    "font_family": "Poppins"
+  },
+  "backend": {
+    "api_url": "https://medusa-smileclinic.azurewebsites.net"
+  },
+  "domain": {
+    "custom_domain": "store.smiledental.com"
+  },
+  "contact_info": {
+    "email": "info@smiledental.com",
+    "phone": "+91-9876543210"
+  }
+}

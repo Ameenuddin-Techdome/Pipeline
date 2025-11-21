@@ -1,0 +1,6 @@
+resource_group_name    = "medusa-rg"
+location               = "eastus"
+app_service_plan_sku   = "P1v2"
+acr_name               = "youracrname"
+clinic_code            = "medusa"
+backend_url            = "https://your-backend-url.com"

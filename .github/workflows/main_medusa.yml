@@ -1,0 +1,98 @@
+name: Build & Deploy Medusa Storefront
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  terraform-deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      app_service_name: ${{ steps.app_name.outputs.name }}
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Azure login for Terraform
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # 3. Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # 4. Terraform Init
+      - name: Terraform Init
+        working-directory: storefront-tf
+        run: |
+          terraform init
+
+      # 4. Terraform Plan
+      - name: Terraform Plan
+        working-directory: storefront-tf
+        run: |
+          terraform plan -input=false -var-file="storefront-vars.tfvars"
+
+      # 5. Terraform Apply
+      - name: Terraform Apply
+        working-directory: storefront-tf
+        run: |
+          terraform apply -input=false -auto-approve -var-file="storefront-vars.tfvars" 
+
+      # 6. Get App Service name from Terraform output
+      - name: Get App Service Name
+        id: app_name
+        working-directory: storefront-tf
+        run: |
+          echo "name=$(terraform output -raw medusa_app_service_name)" >> $GITHUB_OUTPUT
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    needs: terraform-deploy
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/medusa-storefront:latest ./my-medusa-store-storefront
+
+      # 3. Login to Azure Container Registry
+      - name: Login to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      # 4. Push Docker image to ACR
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/medusa-storefront:latest
+          
+  deploy-to-app-service:
+    runs-on: ubuntu-latest
+    needs: [terraform-deploy, build-and-push]
+
+    steps:
+      # 1. Azure login for deployment
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # 2. Deploy to Azure App Service using ACR image
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ needs.terraform-deploy.outputs.app_service_name }}
+          images: '${{ secrets.ACR_NAME }}.azurecr.io/medusa-storefront:latest'

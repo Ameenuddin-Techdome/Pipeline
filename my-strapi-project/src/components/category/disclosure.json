@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_category_disclosures",
+  "info": {
+    "displayName": "Disclosure"
+  },
+  "options": {},
+  "attributes": {
+    "fda_disclaimer": {
+      "type": "blocks"
+    },
+    "usage_info": {
+      "type": "blocks"
+    },
+    "regulatory_info": {
+      "type": "blocks"
+    },
+    "resources_link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

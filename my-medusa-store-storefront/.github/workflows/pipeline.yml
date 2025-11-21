@@ -1,0 +1,67 @@
+name: Terraform + Deploy Medusa
+
+on:
+  push:
+    paths:
+      - "storefront-tf/**"
+      - "my-medusa-store-storefront/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Install dependencies & Build
+      - name: Install & Build
+        working-directory: my-medusa-store-storefront
+        run: |
+          npm install
+          npm run build
+
+      # Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # Azure login for Terraform
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Terraform Init & Apply
+      - name: Terraform Init and Apply
+        working-directory: storefront-tf
+        run: |
+          terraform init
+          terraform apply -auto-approve
+
+      # Get App Service Name
+      - name: Get App Service Name
+        id: get-app-name
+        working-directory: storefront-tf
+        run: |
+          echo "app_name=$(terraform output -raw medusa_app_service_name)" >> $GITHUB_ENV
+
+      # Re-login for Web App Deployment
+      - name: Azure Login for Deployment
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Deploy to Azure Web App
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.app_name }}
+          package: my-medusa-store-storefront
