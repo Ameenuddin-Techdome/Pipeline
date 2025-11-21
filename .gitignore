@@ -18,6 +18,7 @@ Thumbs.db
 # Logs
 *.log
 structure.txt
+####
 
 # If you have any non-sensitive tfvars/configs you want to commit, whitelist them:
 !storefront-tf/storefront-vars-example.tfvars
