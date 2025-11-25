@@ -9,7 +9,7 @@
     "font_family": "Poppins"
   },
   "backend": {
-    "api_url": "https://medusa-smileclinic.azurewebsites.net"
+    "api_url": "https://medusa.test.techdomeaks.com"
   },
   "domain": {
     "custom_domain": "store.smiledental.com"
