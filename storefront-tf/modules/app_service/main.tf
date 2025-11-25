@@ -26,10 +26,19 @@ resource "azurerm_app_service" "app" {
     linux_fx_version = "NODE|18-lts"
   }
 
+  # --- App settings (environment variables) ---
+  app_settings = {
+    DOCKER_ENABLE_CI                        = "true"
+    DOCKER_REGISTRY_SERVER_PASSWORD        = var.acr_password
+    DOCKER_REGISTRY_SERVER_URL             = var.acr_login_server
+    DOCKER_REGISTRY_SERVER_USERNAME        = var.acr_username
+
+    MEDUSA_BACKEND_URL                      = var.backend_url
+    NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY      = var.publishable_key
+    NEXT_PUBLIC_STRAPI_URL                  = var.strapi_url
+  }
+
   identity {
     type = "SystemAssigned"
   }
 }
-
-
-

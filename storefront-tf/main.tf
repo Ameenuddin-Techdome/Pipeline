@@ -24,6 +24,12 @@ module "app" {
   clinic_code         = local.cfg.clinic_code
   backend_url         = local.cfg.backend.api_url
   branding_blob_url   = module.branding_storage.branding_blob_url
-}
 
-#....
+  # Pass ACR + app setting values from root variables
+  acr_login_server    = var.acr_login_server
+  acr_username        = var.acr_username
+  acr_password        = var.acr_password
+
+  publishable_key     = var.publishable_key
+  strapi_url          = var.strapi_url
+}

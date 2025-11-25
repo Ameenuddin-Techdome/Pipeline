@@ -27,3 +27,30 @@ variable "location" {
   description = "Azure location"
   type        = string
 }
+
+# --- New root-level variables to feed into the app module ---
+variable "acr_login_server" {
+  description = "ACR login server (e.g. mystoreacr.azurecr.io)"
+  type        = string
+}
+
+variable "acr_username" {
+  description = "ACR username"
+  type        = string
+}
+
+variable "acr_password" {
+  description = "ACR password (service principal or ACR password)"
+  type        = string
+  sensitive   = true
+}
+
+variable "publishable_key" {
+  description = "Medusa publishable key (NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY)"
+  type        = string
+}
+
+variable "strapi_url" {
+  description = "NEXT_PUBLIC_STRAPI_URL"
+  type        = string
+}

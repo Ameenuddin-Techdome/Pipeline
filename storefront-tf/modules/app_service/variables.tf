@@ -17,3 +17,25 @@ variable "backend_url" {
 variable "branding_blob_url" {
   type = string 
 }
+
+# New variables for ACR + app settings
+variable "acr_login_server" {
+  type = string
+}
+
+variable "acr_username" {
+  type = string
+}
+
+variable "acr_password" {
+  type     = string
+  sensitive = true
+}
+
+variable "publishable_key" {
+  type = string
+}
+
+variable "strapi_url" {
+  type = string
+}
