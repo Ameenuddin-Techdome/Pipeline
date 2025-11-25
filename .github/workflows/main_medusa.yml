@@ -97,4 +97,4 @@ jobs:
           app-name: ${{ needs.terraform-deploy.outputs.app_service_name }}
           images: '${{ secrets.ACR_NAME }}.azurecr.io/medusa-storefront:latest'
 
-###
+#####
